@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   banner: {
     width: 375, // Reduced width to leave space between items
     height: 150,
-    backgroundColor: "pink",
+    backgroundColor: "brown",
     marginRight: 10,
     borderRadius: 15,
     marginBottom: 120,
