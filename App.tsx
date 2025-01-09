@@ -1,118 +1,109 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from "react";
+import { StyleSheet, FlatList, Text, View, Dimensions } from "react-native";
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+const { width } = Dimensions.get("window"); // Set the width
+console.log(width);
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+function App() {
+  const data = [
+    { id: 1, name: "A" },
+    { id: 2, name: "B" },
+    { id: 3, name: "C" },
+    { id: 4, name: "D" },
+    { id: 5, name: "E" },
+    { id: 6, name: "F" },
+    { id: 7, name: "G" },
+    { id: 8, name: "H" },
+    { id: 9, name: "I" },
+    { id: 10, name: "J" },
+  ];
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View style={styles.back}>
+      {/* Header */}
+      <Text style={styles.head}>React Native FlatList</Text>
+
+      {/* Horizontal Banner List */}
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <View style={styles.banner}>
+            <Text style={styles.text}>{item.name}</Text>
+          </View>
+        )}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.horizontalList}
+      />
+
+       
+
+      {/* Vertical List */}
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <Text style={styles.item}>{`${item.id} ${item.name}`}</Text>
+        )}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.verticalList}
+
+        ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: 'gray' }} />}
+
+
+      />
     </View>
   );
 }
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+export default App;
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  back: {
+    flex: 1,
+    backgroundColor: "black",
+    paddingTop: 25,
   },
-  sectionTitle: {
+  head: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "black",
+    marginVertical: 10,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  horizontalList: {
+
+    // paddingVertical: 20,
+    paddingHorizontal: 10,
   },
-  highlight: {
-    fontWeight: '700',
+  verticalList: {
+    paddingBottom: 20,
+    // marginTop: 20,
+  },
+  banner: {
+    width: 375, // Reduced width to leave space between items
+    height: 150,
+    backgroundColor: "pink",
+    marginRight: 10,
+    borderRadius: 15,
+    marginBottom: 120,
+    justifyContent: "center",
+    alignItems: "center",
+
+  },
+  text: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  item: {
+    backgroundColor: "red",
+    color: "white",
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    fontSize: 20,
+    borderRadius: 10,
+    textAlign: "center",
   },
 });
-
-export default App;
