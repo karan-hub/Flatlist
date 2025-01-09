@@ -61,7 +61,7 @@ export default App;
 const styles = StyleSheet.create({
   back: {
     flex: 1,
-    backgroundColor: "orange",
+    backgroundColor: "lightgray",
     paddingTop: 25,
   },
   head: {
