@@ -106,4 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     textAlign: "center",
   },
+  disply:{
+     display:'none'
+  }
 });
